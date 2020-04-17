@@ -1,50 +1,58 @@
-/* eslint-disable no-var */
-// eslint-disable-next-line no-var
-// eslint-disable-next-line prefer-destructuring
-var hash = document.location.hash;
-var $tabBtn = document.querySelectorAll('.js_buttom');
-var $tabCnt = document.querySelectorAll('.js_content');
+function Mycounter() {
+    let currentCount1 = 1;
+    let currentCount = 0;
+    function counter() {
 
-if(hash){
-    // eslint-disable-next-line no-use-before-define
-    activateTab(hash);
+        return currentCount = +currentCount1 + +currentCount;
+    }
+    counter.reset = function () {
+        currentCount = '0';
+        currentCount1 = '1';
+    };
+    counter.set = function (value) {
+        return currentCount = value;
+    };
+    counter.step = function (value) {
+        return currentCount1 = value;
+    };
+
+    return counter;
 }
 
-// eslint-disable-next-line no-unused-vars
-$tabBtn.forEach((item, i) => {
-    item.addEventListener('click', () => {
-        var currentItem = item.getAttribute('data-tab');
-        document.location.hash = currentItem;
-        if(currentItem){
-            // eslint-disable-next-line no-use-before-define
-            activateTab(currentItem);
-        }
+const fbCounter = Mycounter();
+const vkCounter = Mycounter();
 
-    });
+
+document.querySelector('#fb').addEventListener('click', () => {
+    document.getElementById('calckFb').innerHTML = fbCounter();
+});
+document.querySelector('#vk').addEventListener('click', () => {
+    document.getElementById('calckVk').innerHTML = vkCounter();
 });
 
-// eslint-disable-next-line no-shadow
-function activateTab(hash){
-    // eslint-disable-next-line no-unused-vars
-    $tabBtn.forEach((item, i) => {
-        var currentItem = item.getAttribute('data-tab');
-        if(currentItem === hash){
-            item.classList.add('active');
+document.querySelector('#vkStep').addEventListener('click', () => {
+    vkCounter.step(prompt());
+});
 
-        }else{
-            item.classList.remove('active');
-        }
-    });
+document.querySelector('#fbStep').addEventListener('click', () => {
+    fbCounter.step(prompt());
+});
 
-    // eslint-disable-next-line no-unused-vars
-    $tabCnt.forEach((item, i) => {
-        var currentItem = item.getAttribute('data-tab');
-        if(currentItem === hash){
-            item.classList.add('active');
+document.querySelector('#vkStart').addEventListener('click', () => {
+    vkCounter.set(prompt());
+});
 
-        }else{
-            item.classList.remove('active');
-        }
-    });
+document.querySelector('#fbStart').addEventListener('click', () => {
+    fbCounter.set(prompt());
+});
 
-}
+document.querySelector('#vkReset').addEventListener('click', () => {
+    vkCounter.reset();
+    document.getElementById('calckVk').innerHTML = '0';
+});
+
+document.querySelector('#fbReset').addEventListener('click', () => {
+    fbCounter.reset();
+    document.getElementById('calckFb').innerHTML = '0';
+
+});
