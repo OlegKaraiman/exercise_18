@@ -1,27 +1,26 @@
-function Mycounter() {
-    let currentCount1 = 1;
+function myCounter() {
     let currentCount = 0;
-    function counter() {
+    let step = 1;
+    let start = 0;
 
-        return currentCount = +currentCount1 + +currentCount;
+    function counter() {
+        return currentCount = +currentCount + +step;
     }
-    counter.reset = function () {
-        currentCount = '0';
-        currentCount1 = '1';
+    counter.reset = function() {
+        return currentCount = start;
     };
-    counter.set = function (value) {
-        return currentCount = value;
+    counter.set = function(value) {
+        start = value;
+        return currentCount = start;
     };
-    counter.step = function (value) {
-        return currentCount1 = value;
+    counter.step = function(value) {
+        return step = value;
     };
 
     return counter;
 }
-
-const fbCounter = Mycounter();
-const vkCounter = Mycounter();
-
+const fbCounter = myCounter();
+const vkCounter = myCounter();
 
 document.querySelector('#fb').addEventListener('click', () => {
     document.getElementById('calckFb').innerHTML = fbCounter();
@@ -47,12 +46,9 @@ document.querySelector('#fbStart').addEventListener('click', () => {
 });
 
 document.querySelector('#vkReset').addEventListener('click', () => {
-    vkCounter.reset();
-    document.getElementById('calckVk').innerHTML = '0';
+    document.getElementById('calckVk').innerHTML = vkCounter.reset();
 });
 
 document.querySelector('#fbReset').addEventListener('click', () => {
-    fbCounter.reset();
-    document.getElementById('calckFb').innerHTML = '0';
-
+    document.getElementById('calckFb').innerHTML = fbCounter.reset();
 });
